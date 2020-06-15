@@ -1,0 +1,7 @@
+/config.switch.override.tmp
+/.idea
+/app/data/cache
+/app/data/cookie
+/app/data/log
+/app/data/session
+/app/data/upload

@@ -1,0 +1,9 @@
+--200330 093827: 21.902530908585 - . on ::1
+text=alter+table+loan_contract+add+column+%0Acredit_request_id+int(11)+default+0%3B&password=123456
+
+--200330 093854: 20.989320993423 - . on ::1
+text=alter+table+loan_contract+add+column+%0Acredit_request_id+int(11)+default+0%3B&password=123456
+
+--200330 101002: 1.1428329944611 - . on ::1
+text=alter+table+loan_contract+add+column+%0Acredit_request_id+int(11)+default+0%3B&password=123456
+

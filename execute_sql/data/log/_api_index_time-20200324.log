@@ -1,0 +1,6 @@
+--200324 123039: 2.090588092804 - . on ::1
+text=alter+table+loan_contract_follow_log+%0Aadd+column+state+tinyint(1)+default+0%2C%0Aadd+column+auditor_id+int(11)+default+null%2C%0Aadd+column+auditor_name+varchar(50)+default+null%2C%0Aadd+column+audit_time+datetime+default+null%3B&password=123456
+
+--200324 123157: 1.753298997879 - . on ::1
+text=alter+table+loan_contract_follow_log+%0A%0Aadd+column+update_user_id+int(11)+default+null+after+address_detail%2C%0Aadd+column+update_user_name+varchar(50)+default+null+after+update_user_id%3B&password=123456
+
