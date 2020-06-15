@@ -1,17 +1,16 @@
 //app.js
+const request = require('/utils/request.js');
+const config = require("/config.js");
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    var token = wx.getStorageSync('token');
+    if( !token ){
+       this.memberLogin();
+    }
+    // 检查token过期
+    this.checkToken(token);
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -33,7 +32,61 @@ App({
       }
     })
   },
+  memberLogin:function(){
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        request.getRequest("member.login.php", { code: res.code }, res => {
+          if (res.STS) {
+            wx.hideLoading({});
+            wx.setStorageSync('token', res.DATA.token)
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: res.MSG,
+              showCancel: false
+            })
+          }
+        })
+      },
+      fail() {
+        //console.log('获取用户登录态失败！' + res.errMsg);
+        wx.showModal({
+          title: '提示',
+          content: '获取用户登录态失败！' + res.errMsg,
+          showCancel: false
+        })
+      }
+    })
+  },
+  checkToken:function(token){
+    var that = this;
+    request.getRequest('member.check.token.php',{token:token},function(res){
+       if( !res.STS ){
+          console.log(res.MSG);
+          that.memberLogin();
+       }
+    },true);
+  },
+  userInfoReadyCallback:function(userInfo) {
+    request.getRequest('member.update.info.php',{token:token,user_info:userInfo},function(res){
+      if( !res.STS ){
+        console.log(res.MSG);
+        wx.showModal({
+          title: '提示',
+          content: res.MSG,
+          showCancel: false
+        })
+      }
+    },true);
+  },
   globalData: {
     userInfo: null
-  }
-})
+  },
+  config: config
+});
