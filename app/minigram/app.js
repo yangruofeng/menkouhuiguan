@@ -44,7 +44,8 @@ App({
         request.getRequest("member.login.php", { code: res.code }, res => {
           if (res.STS) {
             wx.hideLoading({});
-            wx.setStorageSync('token', res.DATA.token)
+            wx.setStorageSync('token', res.DATA.token);
+            that.globalData.member_info = res.DATA.member_info;
           } else {
             wx.showModal({
               title: '提示',
@@ -74,6 +75,7 @@ App({
     },true);
   },
   userInfoReadyCallback:function(userInfo) {
+    var token = wx.getStorageSync('token');
     request.getRequest('member.update.info.php',{token:token,user_info:userInfo},function(res){
       if( !res.STS ){
         console.log(res.MSG);
@@ -86,7 +88,8 @@ App({
     },true);
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    member_info:null
   },
   config: config
 });

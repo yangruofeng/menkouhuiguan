@@ -9,4 +9,10 @@ class api_baseControl
         $this->request_param = $params;
     }
 
+    public function checkToken()
+    {
+        $token = $this->request_param['token'];
+        $rt = (new member_tokenModel())->checkToken($token);
+        return $rt;
+    }
 }

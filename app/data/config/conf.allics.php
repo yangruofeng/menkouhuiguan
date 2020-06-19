@@ -12,7 +12,7 @@ $config['db_conf']=array(
         "db_host"=>"127.0.0.1",
         "db_user"=>"root",
         "db_pwd"=>"root",
-        "db_name"=>"bank_live",
+        "db_name"=>"menkou",
         "db_port"=>3306
     )
 );
@@ -53,6 +53,11 @@ $config['jpush_api'] = array(
 
 $config['api_google_map']='AIzaSyDCPjrMiBD6X2qMRS6EfqBzq_ZY37GGLUA';
 $config['sms_api']='tencent';
+
+$config['wx_config'] = array(
+    'appId' => 'wx5a692d48367b9356',
+    'appKey' => 'c5f53e6ca2f4917edb4caf4c66463335'
+);
 
 
 
