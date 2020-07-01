@@ -73,6 +73,16 @@ Page({
   getUserInfo: function(e) {
     console.log(e)
     var res = e.detail;
-    this.afterGetUserInfo(res.userInfo);
+    if( res.userInfo ){
+        // 允许
+        this.afterGetUserInfo(res.userInfo);
+    }else{
+        // 拒绝 退出小程序
+        console.log('reject');
+        wx.navigateBack({
+          delta: 2
+      })
+    }
+   
   }
 })
