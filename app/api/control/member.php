@@ -2,7 +2,7 @@
 class memberControl extends api_baseControl
 {
 
-    public function updateInfo()
+    public function updateInfoOp()
     {
         $rt = $this->checkToken();
         if( !$rt->STS ){
@@ -10,8 +10,8 @@ class memberControl extends api_baseControl
         }
         debug($this->request_param);
         $member_info = $rt->DATA;
-        $user_info = $this->request_param['user_info'];
-        return new result(true,'success');
+        $member_id = $member_info['uid'];
+        return memberClass::updateMemberUserInfo($member_id,$this->request_param);
     }
 
 }

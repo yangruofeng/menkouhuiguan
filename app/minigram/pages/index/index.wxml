@@ -9,7 +9,7 @@
 			</view>
 			<view class='content'>
 				<view>申请获取以下权限</view> <text>获得你的公开信息(昵称，头像等)</text>
-			</view> 
+			</view>
 			<button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo"> 授权登录 </button>
 
 		</view>
@@ -17,6 +17,29 @@
 	</view>
 	<view wx:else>
 		<!-- 首页 -->
+		<view class='header'>
+			<image src='{{userInfo.avatarUrl}}'></image>
+		</view>
+		<view>
+			<text>Nickname:{{userInfo.nickName}}</text>
+		</view>
+		<block wx:if="{{blockid==0}}">
+			这里是首页A
+		</block>
+		<block wx:if="{{blockid==1}}">
+			这里是首页B
+		</block>
+		<block wx:if="{{blockid==2}}">
+			这里是首页C
+		</block>
+		<block wx:if="{{blockid==3}}">
+			这里是首页D
+		</block>
+
+		
 	</view>
 
 </view>
+
+<!--底部tabbar【一般正常用法，index页面特殊用法】-->
+		<tabbar tabbarData="{{tabbar}}" active="{{0}}" bgcolor="{{bgcolor}}" color="{{color}}" selectedColor="{{selectedColor}}" showborder="{{showborder}}" bind:tapChange="tabbarChange" />

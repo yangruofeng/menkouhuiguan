@@ -8,7 +8,28 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isAuth: false
+    isAuth: false,
+    tabbar: [{
+      pagePath: "page/home0/index",
+      selectedIconPath: '/resources/tabbar/homeh.png',
+      iconPath: '/resources/tabbar/home.png',
+      text: '首页A',
+    }, {
+      pagePath: "page/home1/index",
+      selectedIconPath: '/resources/tabbar/kindh.png',
+      iconPath: '/resources/tabbar/kind.png',
+      text: '首页B',
+    }, {
+      pagePath: "page/home2/index",
+      selectedIconPath: '/resources/tabbar/myh.png',
+      iconPath: '/resources/tabbar/my.png',
+      text: '首页C',
+    }, {
+      pagePath: "page/home3/index",
+      selectedIconPath: '/resources/tabbar/shopcarth.png',
+      iconPath: '/resources/tabbar/shopcart.png',
+      text: '首页D',
+    }]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -17,41 +38,41 @@ Page({
     })
   },
   onLoad: function () {
-    
+    var that = this;
     if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
+       this.setPageUserInfo(app.globalData.userInfo);
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        });
-        app.globalData.userInfo = res.userInfo
+          that.afterGetUserInfo(res.userInfo);
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+          that.afterGetUserInfo(res.userInfo);
         }
       })
     }
   },
+  setPageUserInfo:function(userInfo){
+    this.setData({
+      userInfo: userInfo,
+      hasUserInfo: true,
+      isAuth:true
+    });
+  },
+  afterGetUserInfo:function(userInfo)
+  {
+      var that = this;
+      that.setPageUserInfo(userInfo);
+      app.globalData.userInfo = userInfo;
+      app.updateMemberInfo(userInfo);
+  },
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    var res = e.detail;
+    this.afterGetUserInfo(res.userInfo);
   }
 })

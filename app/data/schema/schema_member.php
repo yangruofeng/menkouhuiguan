@@ -33,7 +33,7 @@ $static_schema=array (
   3 => 
   array (
     'Field' => 'avatar_url',
-    'Type' => 'varchar(200)',
+    'Type' => 'varchar(500)',
     'Null' => 'YES',
     'Key' => '',
     'Default' => NULL,
@@ -117,6 +117,16 @@ $static_schema=array (
     'Null' => 'YES',
     'Key' => '',
     'Default' => '0',
+    'Extra' => '',
+    'Comment' => '',
+  ),
+  12 => 
+  array (
+    'Field' => 'last_info_time',
+    'Type' => 'datetime',
+    'Null' => 'YES',
+    'Key' => '',
+    'Default' => NULL,
     'Extra' => '',
     'Comment' => '',
   ),

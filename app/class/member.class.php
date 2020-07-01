@@ -36,14 +36,8 @@ class memberClass
             'grant_type' => 'authorization_code',
         );
 
-
         //api接口 如使用地方较多提取到配置文件
         $api = "https://api.weixin.qq.com/sns/jscode2session?";
-        /*$params_format = array();
-        foreach ($params as $key => $val) {
-            $params_format[] = $key . '=' . $val;
-        }
-        $api .= implode("&", $params_format);*/
         $api .= http_build_query($wx_params);
         //发送
         $rt_str = curl_get_https($api);
@@ -72,6 +66,32 @@ class memberClass
             'member_info' => $member_info,
             'token' => $token
         ));
+    }
+
+    public static function updateMemberUserInfo($member_id,$userInfo)
+    {
+        $m = new memberModel();
+        $member = $m->getRow($member_id);
+        if( !$member ){
+            return new result(false,'Invalid member id:'.$member_id);
+        }
+        if( $member->is_update_info ){
+            return new result(true,'success');
+        }
+        $member->nick_name = $userInfo['nickName'];
+        $member->avatar_url = $userInfo['avatarUrl'];
+        $member->gender = $userInfo['gender'];
+        $member->country = $userInfo['country'];
+        $member->province = $userInfo['province'];
+        $member->city = $userInfo['city'];
+        $member->is_update_info = 1;
+        $member->update_time = Now();
+        $member->last_info_time = Now();
+        $rt = $member->update();
+        if( !$rt->STS ){
+            return $rt;
+        }
+        return new result(true,'success');
     }
 
 }
