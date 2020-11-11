@@ -13,8 +13,9 @@ $static_lang=array (
     'state' => 'State',
     'create_time' => 'Create Time',
     'update_time' => 'Update Time',
-    'is_update_info' => 'Is Update Info',
     'last_info_time' => 'Last Info Time',
+    'unionid' => 'Unionid',
+    'is_auth' => 'Is Auth',
   ),
   'zh_cn' => 
   array (
@@ -29,8 +30,9 @@ $static_lang=array (
     'state' => 'State',
     'create_time' => 'Create Time',
     'update_time' => 'Update Time',
-    'is_update_info' => 'Is Update Info',
     'last_info_time' => 'Last Info Time',
+    'unionid' => 'Unionid',
+    'is_auth' => 'Is Auth',
   ),
   'kh' => 
   array (
@@ -45,7 +47,8 @@ $static_lang=array (
     'state' => 'State',
     'create_time' => 'Create Time',
     'update_time' => 'Update Time',
-    'is_update_info' => 'Is Update Info',
     'last_info_time' => 'Last Info Time',
+    'unionid' => 'Unionid',
+    'is_auth' => 'Is Auth',
   ),
 );

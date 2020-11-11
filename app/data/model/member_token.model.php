@@ -34,7 +34,9 @@ class member_tokenModel extends tableModelBase
         if( !$member_info ){
             return new result(false,'Token无效');
         }
-        return new result(true,'success',$member_info);
+        // todo 增加token过期时间检查
+        $memberInfo = memberClass::getLoginMemberInfo($member_info['uid']);
+        return new result(true,'success',$memberInfo);
     }
 
 }

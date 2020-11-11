@@ -1,4 +1,10 @@
 /**index.wxss**/
+.no-show{
+  display: none;
+}
+.show{
+  display: block;
+}
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,4 @@
+<!--pages/student/my/my.wxml-->
+<text>pages/student/my/my.wxml</text>
+
+<mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{tabbar}}" bindchange="tabChange" current="{{select}}"></mp-tabbar>

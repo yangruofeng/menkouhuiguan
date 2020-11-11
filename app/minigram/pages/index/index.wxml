@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
 
-	<view wx:if="{{!isAuth}}">
+	<view wx:if="{{!userInfo}}">
 
-		<view wx:if="{{!hasUserInfo && canIUse}}">
+		<view  wx:if="{{canIUse}}">
 			<view class='header'>
 				<image src='/images/weixin.jpg'></image>
 			</view>
@@ -15,31 +15,6 @@
 		</view>
 
 	</view>
-	<view wx:else>
-		<!-- 首页 -->
-		<view class='header'>
-			<image src='{{userInfo.avatarUrl}}'></image>
-		</view>
-		<view>
-			<text>Nickname:{{userInfo.nickName}}</text>
-		</view>
-		<block wx:if="{{blockid==0}}">
-			这里是首页A
-		</block>
-		<block wx:if="{{blockid==1}}">
-			这里是首页B
-		</block>
-		<block wx:if="{{blockid==2}}">
-			这里是首页C
-		</block>
-		<block wx:if="{{blockid==3}}">
-			这里是首页D
-		</block>
-
-		
-	</view>
 
 </view>
-
-<!--底部tabbar【一般正常用法，index页面特殊用法】-->
-		<tabbar tabbarData="{{tabbar}}" active="{{0}}" bgcolor="{{bgcolor}}" color="{{color}}" selectedColor="{{selectedColor}}" showborder="{{showborder}}" bind:tapChange="tabbarChange" />
+	

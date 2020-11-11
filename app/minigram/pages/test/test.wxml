@@ -1,0 +1,7 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml</text>
+
+<!-- 
+<view>
+<tabbar tabbarData="{{tabbar}}" active="{{0}}" bgcolor="{{bgcolor}}" color="{{color}}" selectedColor="{{selectedColor}}" showborder="{{showborder}}" bind:tapChange="tabbarChange" />
+</view> -->

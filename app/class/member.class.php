@@ -1,7 +1,7 @@
 <?php
 class memberClass
 {
-    public static function registerMemberByOpenID($open_id)
+    public static function registerMemberByOpenID($open_id,$unionid=null)
     {
         $m = new memberModel();
         $member = $m->find(array(
@@ -12,6 +12,7 @@ class memberClass
         }
         $member = $m->newRow();
         $member->open_id = $open_id;
+        $member->unionid = $unionid;
         $member->create_time = Now();
         $rt = $member->insert();
         if( !$rt->STS ){
@@ -47,13 +48,16 @@ class memberClass
         }
 
         $wx_openId = $rt_arr['openid'];
+        $session_key = $rt_arr['session_key'];
+        $unionid = $rt_arr['unionid'];
 
         //账号注册
-        $rt = self::registerMemberByOpenID($wx_openId);
+        $rt = self::registerMemberByOpenID($wx_openId,$unionid);
         if( !$rt->STS ){
             return $rt;
         }
         $member_info = $rt->DATA;
+        $return_member_info = self::getLoginMemberInfo($member_info['uid']);
 
         //生成token
         $m_member_token = new member_tokenModel();
@@ -63,9 +67,17 @@ class memberClass
         }
         $token = $rt->DATA;
         return new result(true,'success',array(
-            'member_info' => $member_info,
+            'member_info' => $return_member_info,
             'token' => $token
         ));
+    }
+
+    // 获取返回给前端的登录用户信息
+    public static function getLoginMemberInfo($member_id)
+    {
+        $m = new memberModel();
+        $member = $m->find($member_id);
+        return $member;
     }
 
     public static function updateMemberUserInfo($member_id,$userInfo)
@@ -75,7 +87,7 @@ class memberClass
         if( !$member ){
             return new result(false,'Invalid member id:'.$member_id);
         }
-        if( $member->is_update_info ){
+        if( $member->is_auth ){
             return new result(true,'success');
         }
         $member->nick_name = $userInfo['nickName'];
@@ -84,7 +96,7 @@ class memberClass
         $member->country = $userInfo['country'];
         $member->province = $userInfo['province'];
         $member->city = $userInfo['city'];
-        $member->is_update_info = 1;
+        $member->is_auth = 1;
         $member->update_time = Now();
         $member->last_info_time = Now();
         $rt = $member->update();

@@ -1,35 +1,13 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
+    motto: '门口绘馆',
+    userInfo: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isAuth: false,
-    tabbar: [{
-      pagePath: "page/home0/index",
-      selectedIconPath: '/resources/tabbar/homeh.png',
-      iconPath: '/resources/tabbar/home.png',
-      text: '首页A',
-    }, {
-      pagePath: "page/home1/index",
-      selectedIconPath: '/resources/tabbar/kindh.png',
-      iconPath: '/resources/tabbar/kind.png',
-      text: '首页B',
-    }, {
-      pagePath: "page/home2/index",
-      selectedIconPath: '/resources/tabbar/myh.png',
-      iconPath: '/resources/tabbar/my.png',
-      text: '首页C',
-    }, {
-      pagePath: "page/home3/index",
-      selectedIconPath: '/resources/tabbar/shopcarth.png',
-      iconPath: '/resources/tabbar/shopcart.png',
-      text: '首页D',
-    }]
+    isAuth: false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -38,28 +16,58 @@ Page({
     })
   },
   onLoad: function () {
+    //console.log(app);
     var that = this;
-    if (app.globalData.userInfo) {
-       this.setPageUserInfo(app.globalData.userInfo);
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-          that.afterGetUserInfo(res.userInfo);
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          that.afterGetUserInfo(res.userInfo);
+    app.getUserInfo(function(userInfo){
+        console.log(userInfo);
+        if( userInfo ){
+          that.setPageUserInfo(userInfo);
+        }else{
+            if( that.data.canIUse ){
+
+            }else{
+                // 在没有 open-type=getUserInfo 版本的兼容处理
+                wx.getUserInfo({
+                  success: res => {
+                    that.afterGetUserInfo(res.userInfo);
+                  }
+                })
+            }
         }
-      })
-    }
+    });
+  },
+  onShow:function(){
+    console.log(this.data);
+    // if (typeof this.getTabBar === 'function' &&
+    //   this.getTabBar()) {
+    //   this.getTabBar().setData({
+    //     selected: 0,
+    //     list: [
+    //       {
+    //         "pagePath": "/pages/index/index",
+    //         "iconPath": "/images/icon_component.png",
+    //         "selectedIconPath": "/images/icon_component_HL.png",
+    //         "text": "组件"
+    //       },
+    //       {
+    //         "pagePath": "/pages/test/test",
+    //         "iconPath": "/images/icon_API.png",
+    //         "selectedIconPath": "/images/icon_API_HL.png",
+    //         "text": "接口"
+    //       },
+    //       {
+    //         "pagePath": "/pages/test/test",
+    //         "iconPath": "/images/icon_API.png",
+    //         "selectedIconPath": "/images/icon_API_HL.png",
+    //         "text": "接口"
+    //       }
+    //       ]
+    //   });
+    // }
   },
   setPageUserInfo:function(userInfo){
     this.setData({
       userInfo: userInfo,
-      hasUserInfo: true,
       isAuth:true
     });
   },
@@ -67,8 +75,7 @@ Page({
   {
       var that = this;
       that.setPageUserInfo(userInfo);
-      app.globalData.userInfo = userInfo;
-      app.updateMemberInfo(userInfo);
+      app.userInfoReadyCallback(userInfo);
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -79,9 +86,19 @@ Page({
     }else{
         // 拒绝 退出小程序
         console.log('reject');
-        wx.navigateBack({
-          delta: 2
-      })
+        try{
+          // wx.navigateBack({
+          //   delta: 2
+          // })
+          wx.showModal({
+            title: '提示',
+            content: '为了您更好的体验，请允许授权获得您的公开信息！',
+            showCancel: false
+        });
+        }catch( ex ){
+
+        }
+       
     }
    
   }

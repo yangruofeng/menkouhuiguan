@@ -1,14 +1,27 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+	"pages": [
+		"pages/index/index",
+		"pages/logs/logs",
+		"pages/test/test",
+		"pages/student/index/index",
+		"pages/student/my/my",
+		"pages/teacher/index/index",
+		"pages/teacher/my/my",
+		"pages/student/message/message",
+		"pages/manager/index/index",
+		"pages/manager/ma_my/ma_my"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "门口绘馆",
+		"navigationBarTextStyle": "black"
+	},
+	"style": "v2",
+	"sitemapLocation": "sitemap.json",
+	"debug": true,
+	"useExtendedLib": {
+		"kbone": true,
+		"weui": true
+	}
 }

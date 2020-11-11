@@ -22,6 +22,16 @@ $static_schema=array (
   ),
   2 => 
   array (
+    'Field' => 'unionid',
+    'Type' => 'varchar(200)',
+    'Null' => 'YES',
+    'Key' => '',
+    'Default' => NULL,
+    'Extra' => '',
+    'Comment' => '',
+  ),
+  3 => 
+  array (
     'Field' => 'nick_name',
     'Type' => 'varchar(100)',
     'Null' => 'YES',
@@ -30,7 +40,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '微信昵称',
   ),
-  3 => 
+  4 => 
   array (
     'Field' => 'avatar_url',
     'Type' => 'varchar(500)',
@@ -40,7 +50,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  4 => 
+  5 => 
   array (
     'Field' => 'gender',
     'Type' => 'varchar(100)',
@@ -50,7 +60,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '微信号',
   ),
-  5 => 
+  6 => 
   array (
     'Field' => 'province',
     'Type' => 'varchar(100)',
@@ -60,7 +70,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  6 => 
+  7 => 
   array (
     'Field' => 'city',
     'Type' => 'varchar(100)',
@@ -70,7 +80,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  7 => 
+  8 => 
   array (
     'Field' => 'country',
     'Type' => 'varchar(100)',
@@ -80,7 +90,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  8 => 
+  9 => 
   array (
     'Field' => 'state',
     'Type' => 'tinyint(1)',
@@ -90,7 +100,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  9 => 
+  10 => 
   array (
     'Field' => 'create_time',
     'Type' => 'datetime',
@@ -100,7 +110,7 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  10 => 
+  11 => 
   array (
     'Field' => 'update_time',
     'Type' => 'datetime',
@@ -110,17 +120,17 @@ $static_schema=array (
     'Extra' => '',
     'Comment' => '',
   ),
-  11 => 
+  12 => 
   array (
-    'Field' => 'is_update_info',
+    'Field' => 'is_auth',
     'Type' => 'tinyint(1)',
     'Null' => 'YES',
     'Key' => '',
     'Default' => '0',
     'Extra' => '',
-    'Comment' => '',
+    'Comment' => '是否授权',
   ),
-  12 => 
+  13 => 
   array (
     'Field' => 'last_info_time',
     'Type' => 'datetime',
